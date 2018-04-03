@@ -60,16 +60,19 @@ subscribe to the
 [tomcat-announce](http://tomcat.apache.org/lists.html#tomcat-announce) email
 list.
 
-* If you have a concrete bug report for中添加如下配置即可运行 Apache Tomcat, please see the
+* If you have a concrete bug report for Apache Tomcat, please see the
 instructions for reporting a bug
-[here](http://tomcat.apache.org/bugrepo启动参数为：rt.html).
+[here](http://tomcat.apache.org/bugrepo：rt.html).
 
 ### Contributing
 
 Please see [CONTRIBUTING](CONTRIBUTING.md) for more info.
 
+### Idea中配置tomcat并运行
+
+如果需要idea中运行tomcat程序，需要添加如下配置：
 在idea中新建Application，指定启动类为：org.apache.catalina.startup.Bootstrap
--Dcatalina.home="C:\Users\Administrator\IdeaProjects\mh\tomcat"
+启动参数为:-Dcatalina.home="{在本地系统的路径}\tomcat\catalina-home"
 1、首先配置pom文件，然后点击导入maven工程，然后点击install即可。
 2、启动应用程序，然后再浏览器输入http://localhost:8080/mh/之后，如果可以看到Hello
 信息，那么说明tomcat启动成功。（也许你会看到启动报错，那个是正常的，因为webappclassloader
