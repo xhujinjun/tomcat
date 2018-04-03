@@ -60,10 +60,13 @@ subscribe to the
 [tomcat-announce](http://tomcat.apache.org/lists.html#tomcat-announce) email
 list.
 
-* If you have a concrete bug report for Apache Tomcat, please see the
+* If you have a concrete bug report for中添加如下配置即可运行 Apache Tomcat, please see the
 instructions for reporting a bug
-[here](http://tomcat.apache.org/bugreport.html).
+[here](http://tomcat.apache.org/bugrepo启动参数为：rt.html).
 
 ### Contributing
 
 Please see [CONTRIBUTING](CONTRIBUTING.md) for more info.
+
+在idea中新建Application，指定启动类为：org.apache.catalina.startup.Bootstrap
+-Dcatalina.home="C:\Users\Administrator\IdeaProjects\mh\tomcat"
