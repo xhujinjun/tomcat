@@ -70,3 +70,8 @@ Please see [CONTRIBUTING](CONTRIBUTING.md) for more info.
 
 在idea中新建Application，指定启动类为：org.apache.catalina.startup.Bootstrap
 -Dcatalina.home="C:\Users\Administrator\IdeaProjects\mh\tomcat"
+1、首先配置pom文件，然后点击导入maven工程，然后点击install即可。
+2、启动应用程序，然后再浏览器输入http://localhost:8080/mh/之后，如果可以看到Hello
+信息，那么说明tomcat启动成功。（也许你会看到启动报错，那个是正常的，因为webappclassloader
+没有加载到webapps下面的事例的class文件，因为下面的文件都是java源文件，所以无法加载）
+3、可以把自己项目的class文件放入到webapps，这样是可以访问的。
