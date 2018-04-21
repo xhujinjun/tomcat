@@ -1,5 +1,19 @@
 ## Welcome to Apache Tomcat!
 
+### Idea中配置tomcat并运行
+
+如果需要idea中运行tomcat程序，需要添加如下配置：
+在idea中新建Application，指定启动类为：org.apache.catalina.startup.Bootstrap
+启动参数为:-Dcatalina.home="{在本地系统的路径}\tomcat\catalina-home"
+1、首先配置pom文件，然后点击导入maven工程，然后点击install即可。
+2、启动应用程序，然后再浏览器输入http://localhost:8080/mh/之后，如果可以看到Hello
+信息，那么说明tomcat启动成功。（也许你会看到启动报错，那个是正常的，因为webappclassloader
+没有加载到webapps下面的事例的class文件，因为下面的文件都是java源文件，所以无法加载）
+3、可以把自己项目的class文件放入到webapps，这样是可以访问的。
+
+### 源码解读博客
+tomcat源码解读相关的文档将会发布到博客http://47777205.com/ ，感兴趣的可以关注该博客。
+
 ### What Is It?
 
 The Apache Tomcat® software is an open source implementation of the Java
@@ -67,14 +81,3 @@ instructions for reporting a bug
 ### Contributing
 
 Please see [CONTRIBUTING](CONTRIBUTING.md) for more info.
-
-### Idea中配置tomcat并运行
-
-如果需要idea中运行tomcat程序，需要添加如下配置：
-在idea中新建Application，指定启动类为：org.apache.catalina.startup.Bootstrap
-启动参数为:-Dcatalina.home="{在本地系统的路径}\tomcat\catalina-home"
-1、首先配置pom文件，然后点击导入maven工程，然后点击install即可。
-2、启动应用程序，然后再浏览器输入http://localhost:8080/mh/之后，如果可以看到Hello
-信息，那么说明tomcat启动成功。（也许你会看到启动报错，那个是正常的，因为webappclassloader
-没有加载到webapps下面的事例的class文件，因为下面的文件都是java源文件，所以无法加载）
-3、可以把自己项目的class文件放入到webapps，这样是可以访问的。
