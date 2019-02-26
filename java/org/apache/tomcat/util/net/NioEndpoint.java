@@ -381,7 +381,7 @@ public class NioEndpoint extends AbstractJsseEndpoint<NioChannel,SocketChannel> 
         // Process the connection
         try {
             //disable blocking, APR style, we are gonna be polling it
-            socket.configureBlocking(false);
+            socket.configureBlocking(false);//设置套接字为非阻塞套接字
             Socket sock = socket.socket();
             socketProperties.setProperties(sock);
 
@@ -400,6 +400,7 @@ public class NioEndpoint extends AbstractJsseEndpoint<NioChannel,SocketChannel> 
                 channel.setIOChannel(socket);
                 channel.reset();
             }
+            //注册通道
             getPoller0().register(channel);
         } catch (Throwable t) {
             ExceptionUtils.handleThrowable(t);
@@ -592,6 +593,7 @@ public class NioEndpoint extends AbstractJsseEndpoint<NioChannel,SocketChannel> 
 
         private void addEvent(PollerEvent event) {
             events.offer(event);
+            //唤醒selector
             if ( wakeupCounter.incrementAndGet() == 0 ) selector.wakeup();
         }
 
@@ -774,6 +776,7 @@ public class NioEndpoint extends AbstractJsseEndpoint<NioChannel,SocketChannel> 
                         iterator.remove();
                     } else {
                         iterator.remove();
+                        //处理事件Key
                         processKey(sk, attachment);
                     }
                 }//while
@@ -796,8 +799,9 @@ public class NioEndpoint extends AbstractJsseEndpoint<NioChannel,SocketChannel> 
                         } else {
                             unreg(sk, attachment, sk.readyOps());
                             boolean closeSocket = false;
-                            // Read goes before write
+                            // Read goes before write 可读
                             if (sk.isReadable()) {
+                                //处理可读
                                 if (!processSocket(attachment, SocketEvent.OPEN_READ, true)) {
                                     closeSocket = true;
                                 }

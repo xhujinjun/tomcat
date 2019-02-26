@@ -295,7 +295,11 @@ public class CoyoteAdapter implements Adapter {
         return success;
     }
 
-
+    /**
+     * important:
+     *
+     *  Call the service method, and notify all listeners
+     */
     @Override
     public void service(org.apache.coyote.Request req, org.apache.coyote.Response res)
             throws Exception {
@@ -332,14 +336,15 @@ public class CoyoteAdapter implements Adapter {
         req.getRequestProcessor().setWorkerThreadName(THREAD_NAME.get());
 
         try {
-            // Parse and set Catalina and configuration specific
-            // request parameters
+            // Parse and set Catalina and configuration specific request parameters
+            //解析请求的参数,查找context,解析CookieID,session等.
             postParseSuccess = postParseRequest(req, request, res, response);
             if (postParseSuccess) {
                 //check valves if we support async
                 request.setAsyncSupported(
                         connector.getService().getContainer().getPipeline().isAsyncSupported());
                 // Calling the container
+                // 调用容器的方法
                 connector.getService().getContainer().getPipeline().getFirst().invoke(
                         request, response);
             }
@@ -690,6 +695,7 @@ public class CoyoteAdapter implements Adapter {
             decodedURI.recycle();
         }
 
+        //如果能匹配上
         while (mapRequired) {
             // This will map the the latest version by default
             connector.getService().getMapper().map(serverName, decodedURI,
